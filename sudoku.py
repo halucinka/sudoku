@@ -99,7 +99,7 @@ class Sudoku:
         while not q.empty():
             x, y = q.pop()
             if (len(ps[x][y]) != 1):
-                print('Something is terribly wrong!')
+                #print('Something is terribly wrong! There will be no solution!')
                 break
             else:
                 number = ps[x][y][0]
@@ -182,21 +182,22 @@ class Sudoku:
             for i in range(9):
                 for j in range(9):
                     self.solution[i][j] = solution[i][j][0]
-        else:
-            self.solution = []
+
 
         self.solutionToString()
         #print(self.solutionString)
         return(self.solution)
 
     def solutionToString(self):
+        #print(self.solution)
         self.solutionString = ''
         if (self.solution[0][0] == -1):
             self.solutionString = 'NO'
-        for i in range(9):
-            for j in range(9):
-                self.solutionString += str(self.solution[i][j])
-            self.solutionString += '\n'
+        else:
+            for i in range(9):
+                for j in range(9):
+                    self.solutionString += str(self.solution[i][j])
+                self.solutionString += '\n'
         return(self.solutionString)
     '''
     Writes solution to standard output.
