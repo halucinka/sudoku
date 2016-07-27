@@ -11,6 +11,7 @@ import unittest
 
 class Test_sudoku(unittest.TestCase):
     def testEmpty(self):
+        # given an empty sudoku
         sud = (' -------------------------------------' + '\n'
         +'|   |   |   ||   |   |   ||   |   |   |' + '\n'
         +' ------------------------------------- ' + '\n'
@@ -30,10 +31,14 @@ class Test_sudoku(unittest.TestCase):
         +' ------------------------------------- ' + '\n'
         +'|   |   |   ||   |   |   ||   |   |   |' + '\n'
         +' ------------------------------------- ' + '\n')
+
+        # when solving a sudoku
         S = sudoku.Sudoku()
         S.readInputSudoku(sud)
         S.solveSudoku()
         valid = True
+
+        # then each row should have a unique number from [1..9]
         for i in range(9):
             numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             for j in range(9):
@@ -45,7 +50,8 @@ class Test_sudoku(unittest.TestCase):
             if (len(numbers) > 0):
                 valid = False
                 break
-        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        # then each column should have a unique number from [1..9]
         for i in range(9):
             numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             for j in range(9):
@@ -57,6 +63,11 @@ class Test_sudoku(unittest.TestCase):
             if (len(numbers) > 0):
                 valid = False
                 break
+
+
+        # then each square should have a unique number from [1..9]
+        # the square is 3x3 matrix
+        # the board is divided into 3x3 grid where each cell in the grid is one square
         for square_x in range(3):
             for square_y in range(3):
                 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -72,6 +83,7 @@ class Test_sudoku(unittest.TestCase):
                             break
         if (len(numbers) > 0):
             valid = False
+
 
 
         self.assertEqual(valid, True)
@@ -120,9 +132,12 @@ class Test_sudoku(unittest.TestCase):
         + ' -------------------------------------\n'
          + '|   |   |   ||   |   |   ||   |   |   |\n'
         + ' -------------------------------------\n')
+
+        # when solving a sudoku
         S = sudoku.Sudoku()
         S.readInputSudoku(sud)
         S.solveSudoku()
+        #then check if the output of sudoku solver is identical to specific solution
         self.assertEqual('534678912\n672195348\n198342567\n859761423\n426853791\n713924856\n961537284\n287419635\n345286179\n', S.solutionString)
 
 
@@ -152,6 +167,7 @@ class Test_sudoku(unittest.TestCase):
         self.assertEqual('534678912\n672195348\n198342567\n859761423\n426853791\n713924856\n961537284\n287419635\n345286179\n', S.solutionString)
 
     def test_sudoku_hard(self):
+        # given an sudoku which is known to be hard for person
         sud = (' -------------------------------------\n'
         + '|   | 5 | 3 || 1 | 6 |   || 2 |   | 8 |\n'
         + '-------------------------------------\n'
